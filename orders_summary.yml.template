@@ -1,0 +1,25 @@
+# @See https://github.com/embulk/embulk-input-gcs
+# @See https://github.com/embulk/embulk-output-jdbc/tree/master/embulk-output-mysql
+
+in:
+{% include 'in/bigquery' %}
+  path_prefix: __yyyymm__/orders_summary___today__.csv
+  parser:
+    charset: UTF-8
+    columns:
+    - {name: order_category, type: string}
+    - {name: order_count, type: long}
+    - {name: order_date, type: timestamp, format: '%Y-%m-%d'}
+    delimiter: ','
+    header_line: true
+    newline: CRLF
+    quote: '"'
+    type: csv
+
+out:
+{% include 'out/mysql' %}
+  column_options:
+    order_category: {value_type: string}
+    order_count: {value_type: int}
+    order_date: {value_type: date, timestamp_format: '%Y-%m-%d', timezone: '+0900'}
+  table: orders_summary
