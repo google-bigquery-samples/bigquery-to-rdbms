@@ -1,6 +1,8 @@
 #!/bin/bash
 # run.sh
+# @See https://cloud.google.com/bigquery/bq-command-line-tool
 # @See https://cloud.google.com/bigquery/docs/exporting-data
+# @See https://github.com/embulk/embulk
 
 dstPrj=dwprj7
 dstSet=dc1
@@ -51,7 +53,7 @@ then
   extCode=$?
 fi
 
-#3 load CSV to Cloud SQL
+#3 load CSV to MySQL
 if [ $extCode -eq 0 ]
 then
   yml=${dstTbl}_$today.yml.liquid
