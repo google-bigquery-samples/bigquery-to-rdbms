@@ -59,7 +59,7 @@ then
   sed -i s/__today__/$today/g $yml
   sed -i s/__yyyymm__/$yyyymm/g $yml
   cat $yml
-  .embulk/bin/embulk \
+  $EMBULK_HOME/bin/embulk \
     run $yml
   extCode=$?
 fi
